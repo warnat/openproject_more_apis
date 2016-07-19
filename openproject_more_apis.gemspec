@@ -4,12 +4,12 @@ $:.push File.expand_path("../lib", __FILE__)
 require 'open_project/more_api/version'
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "openproject-more_api"
+  s.name        = "openproject_more_apis"
   s.version     = OpenProject::MoreApi::VERSION
-  s.authors     = "Finn GmbH"
-  s.email       = "info@finn.de"
-  s.homepage    = "https://community.openproject.org/projects/more-api"  # TODO check this URL
-  s.summary     = 'OpenProject More Api'
+  s.authors     = "Ralf Warnat"
+  s.email       = "ralf@wrnt.de"
+  s.homepage    = "https://github.com/warnat/openproject_more_apis/"
+  s.summary     = 'OpenProject More Apis'
   s.description = 'Some missing APIs'
   s.license     = "GPLv3"
 

@@ -16,4 +16,5 @@ See doc/COPYRIGHT.md for more details.
 
 # Changelog
 
-* `#<ticket number>` Create plugin
+* Initial
+

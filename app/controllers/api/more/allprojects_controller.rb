@@ -4,13 +4,20 @@
 #  end
 #end
 
-module Allprojects
-  class AllprojectsController < ApplicationController
+#module Allprojects
+class Api::More::AllprojectsController < ApplicationController
 
-    #resources :allprojects do
+  #resources :allprojects do
 
-    def index
-        '{ "test", "OK:DOit" }'
-    end
+  def index
+    @projects = Project.all
+    
+    p = @projects.map { |l| [l.id, l.identifier, l.name] if l.visible }
+    #    Project.project_tree(Project.visible) do |project, _level|
+    #      @projects << project
+    #    end
+    
+    render :json => p
   end
 end
+#end

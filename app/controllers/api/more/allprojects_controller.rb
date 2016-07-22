@@ -1,23 +1,33 @@
 
-#module Api
-#  module More
-#  end
-#end
+###require '/controllers/api/v2/api_controller'
 
-#module Allprojects
 class Api::More::AllprojectsController < ApplicationController
 
-  #resources :allprojects do
+  include ::Api::V2::ApiController
+
+## OK  skip_before_filter :require_admin, :check_if_login_required
+
+  skip_before_filter :verify_authenticity_token, :check_if_login_required
+  skip_before_filter :disable_api
+  prepend_before_filter :disable_everything_except_api
+
+  ### OK accept_key_auth :index, :getcustomfield
 
   def index
-    @projects = Project.all
+    # authorize_any([:view_work_packages], global: true)
     
-    p = @projects.map { |l| [l.id, l.identifier, l.name] if l.visible }
-    #    Project.project_tree(Project.visible) do |project, _level|
-    #      @projects << project
-    #    end
+    p = Project.all.map { |l| { :id => l.id, :identifier => l.identifier, :name => l.name } if !l.archived? }
+    render :json => p.compact, :root => false
     
-    render :json => p
   end
+  
+  def getcustomfield(:id, :field)
+    render :json => {:projectid => :id, :customfieldname => :field, :value => '' }
+  end
+  
+#      def find_project
+#        @project = Project.includes([{ custom_values: [{ custom_field: :translations }] }])
+#                   .find params[:id]
+#      end
+  
 end
-#end

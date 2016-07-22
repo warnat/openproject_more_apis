@@ -13,9 +13,9 @@ module OpenProject::MoreApis
              :author_url => 'https://github.com/warnat/',
              :requires_openproject => '>= 4.0.0'
 
-    #add_api_path :allprojects do
-    #  "#{root}/allprojects"
-    #end
+    add_api_path :allprojects do
+      "#{root}/allprojects"
+    end
 
   end
 end

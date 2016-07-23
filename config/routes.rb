@@ -5,7 +5,7 @@ OpenProject::Application.routes.draw do
     namespace :more do
       resources :allprojects, only: [ :index], defaults: { format: :json }
       
-      get 'allprojects/:id/customfield/:field', to: 'allprojects#getcustomfield(:id,:field)'
+      get 'allprojects/:project_id/customfield/:custom_field_id', to: 'allprojects#getcustomfield'
       
       resources :allusers,    only: [ :index], defaults: { format: :json }
     end

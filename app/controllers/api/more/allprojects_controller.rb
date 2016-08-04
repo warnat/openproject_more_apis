@@ -28,6 +28,26 @@ class Api::More::AllprojectsController < ApplicationController
                      }
   end
   
+  def archive
+    @project = Project.find(params[:project_id])
+    @repository = @project.repository
+    (render_404; return false) unless @repository
+
+    #render :json => {:project_id => @project.identifier,
+    #                 :revision_number => params[:revision_number],
+    #                 :instructions => @repository.scm.checkout_url(@repository, 'ssh://', ''),
+    #                 :url => @repository.url
+    #                 }
+                     
+    @content = `git archive --format=zip --prefix=#{@project.identifier}/ --remote=#{@repository.url} HEAD`
+    # Force the download
+    send_opt = { filename: "#{@project.identifier}.zip" }
+    # send_type = Redmine::MimeType.of(@path)
+    # send_opt[:type] = send_type.to_s if send_type
+    send_data @content, send_opt
+
+  end
+  
 #      def find_project
 #        @project = Project.includes([{ custom_values: [{ custom_field: :translations }] }])
 #                   .find params[:id]
